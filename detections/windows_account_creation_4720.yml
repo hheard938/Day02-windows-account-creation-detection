@@ -1,0 +1,27 @@
+title: Windows Local User Account Created
+id: day02-windows-account-creation-4720
+status: experimental
+description: Detects creation of a Windows user account using Security Event ID 4720.
+logsource:
+ product: windows
+ service: security
+detection:
+ selection:
+   EventID: 4720
+ condition: selection
+fields:
+ - Computer
+ - SubjectUserName
+ - SubjectDomainName
+ - TargetUserName
+ - TargetDomainName
+ - TargetSid
+falsepositives:
+ - Authorized administrator account creation
+ - Help desk provisioning
+ - Approved service account creation
+level: medium
+tags:
+ - attack.persistence
+ - attack.t1136
+ - attack.t1136.001
